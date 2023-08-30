@@ -21,4 +21,21 @@ int main() {
 
 	cout << "Health : " << hp << endl;
 
+	static bool godmode;
+
+	while (true) {
+		
+		if(GetAsynKeyState(0x74) != 0) { // 0x74 = F5 key check push
+			godmode = !godmode;
+			cout << "GodMode: " << godmode << endl;
+			Beep(500, 500)
+			Sleep(10) // anti game crash
+		}
+
+		if(godmode) {
+			float newhp = 100;
+
+			WriteProccessMemory(pHandle, (LPVOID)(Player + 0x540), &newhp, sizeof(newhp), 0);
+		}
+	}
 }
